@@ -13,11 +13,23 @@ class PetsPage extends Component {
   }
 
   render() {
+    const {match, pets} = this.props;
+    
     return (
-      <div>Pets Page</div>
-    )
+      <div>
+        <PetsList pets={pets} />
+        <Switch>
+          <Route path={`${match.url}/new`} component=   {PetsNew} />
+          <Route path={`${match.url}/:petId`} component= {PetsShow}/>
+          <Route exact path={match.url} render={() =>(
+            <p> Select a Pet from the list </p>
+          )}/>
+        </Switch>
+      </div>    
+    )   
   }
-};
+}
+  
 
 const mapStateToProps = state => {
   return {
